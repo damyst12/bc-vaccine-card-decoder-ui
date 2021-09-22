@@ -70,10 +70,10 @@ def upload_file():
       return redirect(url_for('index'))
 
     file_ext = os.path.splitext(filename)[1]
-    if file_ext not in extensions:
+    if file_ext.lower() not in extensions:
       abort(Response(f'Invalid input file - extension must be one of {", ".join(extensions)}'))
 
-    save_path = f'./image.{file_ext}'
+    save_path = f'./image{file_ext}'
     uploaded_file.save(save_path)
     decoded_data = decode(save_path)
     os.remove(save_path)
